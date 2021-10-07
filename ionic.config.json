@@ -1,0 +1,7 @@
+{
+  "name": "loanPay",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
