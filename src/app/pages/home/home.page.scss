@@ -1,0 +1,28 @@
+.topHeader {
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  width: 90%;
+  text-align: center;
+
+  h3 {
+    color: var(--ion-color-medium);
+  }
+
+  ion-button {
+    margin-top: 2rem;
+    width: 65%;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.centerIMG {
+  width: 80%;
+}

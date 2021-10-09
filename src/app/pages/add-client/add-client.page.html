@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaulrHref="dashboard" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Client</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xl="6" offset-xl="3">
+        <form [formGroup]="addClientForm" (ngSubmit)="login()">
+          <ion-list>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="name" placeholder="User's Name" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="father_name" placeholder="Father's Name" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="mobile" placeholder="Mobile" type="tel"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-textarea rows="4" formControlName="address" placeholder="Mobile" type="tel"></ion-textarea>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="aadhaar" placeholder="Aadhaar Number" type="tel"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="pan" placeholder="Pan Card Number" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-label>Caste</ion-label>
+              <ion-select formControlName="caste" placeholder="Caste">
+                <ion-select-option *ngFor="let caste of casteList" [value]="caste.id">{{caste.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-label>Loan Amount</ion-label>
+              <ion-select formControlName="loan" placeholder="Loan Amount" (ionChange)="loanSelection($event)">
+                <ion-select-option *ngFor="let loan of loanList" [value]="loan">{{loan.amount}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-row>
+              <ion-col size="4">
+                <div class="image-box" (click)="onProductImage()">
+                  <div *ngIf="!base64Image">
+                    <p>
+                      <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
+                    </p>
+                    Add User Image
+                  </div>
+                  <img [src]="base64Image" *ngIf="base64Image" />
+                </div>
+              </ion-col>
+              <ion-col size="4">
+                <div class="image-box" (click)="onProductImage()">
+                  <div *ngIf="!base64Image">
+                    <p>
+                      <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
+                    </p>
+                    Add Aadhaar Image
+                  </div>
+                  <img [src]="base64Image" *ngIf="base64Image" />
+                </div>
+              </ion-col>
+              <ion-col size="4">
+                <div class="image-box" (click)="onProductImage()">
+                  <div *ngIf="!base64Image">
+                    <p>
+                      <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
+                    </p>
+                    Add Pan Card Image
+                  </div>
+                  <img [src]="base64Image" *ngIf="base64Image" />
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="show">
+              <ion-col size="6">
+                <div class="image-box" (click)="onProductImage()">
+                  <div *ngIf="!base64Image">
+                    <p>
+                      <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
+                    </p>
+                    Add CA Image
+                  </div>
+                  <img [src]="base64Image" *ngIf="base64Image" />
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="image-box" (click)="onProductImage()">
+                  <div *ngIf="!base64Image">
+                    <p>
+                      <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
+                    </p>
+                    Add Salary Slip
+                  </div>
+                  <img [src]="base64Image" *ngIf="base64Image" />
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" [disabled]="!addClientForm.valid" type="submit">
+                Verify
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

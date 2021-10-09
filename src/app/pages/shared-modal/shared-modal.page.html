@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClose()">
+        <ion-icon name="close" slot="icon-only" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <!--Support Form-->
+    <ion-row *ngIf="flag == 'support'">
+      <ion-col size-xl="6" offset-xl="3">
+        <ion-card>
+          <ion-card-header color="primary">
+            <ion-card-subtitle>Raise a Query</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="queryForm" (ngSubmit)="query()">
+              <ion-list>
+                <ion-item class="input ion-margin-bottom" lines="none">
+                  <ion-input formControlName="name" placeholder="Name" type="text"></ion-input>
+                </ion-item>
+                <ion-item class="input ion-margin-bottom" lines="none">
+                  <ion-input formControlName="mobile" placeholder="Mobile" type="tel"></ion-input>
+                </ion-item>
+                <ion-item class="input ion-margin-bottom" lines="none">
+                  <ion-input formControlName="email" placeholder="Email" type="email"></ion-input>
+                </ion-item>
+                <ion-item class="input ion-margin-bottom" lines="none">
+                  <ion-textarea rows="4" formControlName="query" placeholder="Query" type="text"></ion-textarea>
+                </ion-item>
+              </ion-list>
+              <ion-row>
+                <ion-col>
+                  <ion-button expand="block" type="submit" [disabled]="!queryForm.valid">Submit</ion-button>
+                </ion-col>
+              </ion-row>
+            </form>
+          </ion-card-content>
+        </ion-card>
+        <ion-list>
+          <ion-list-header style="padding-inline-start: 0 !important;">
+            <ion-label class="ion-text-center">-- OR --</ion-label>
+          </ion-list-header>
+          <ion-button expand="block" fill="outline" class="ion-margin-vertical" (click)="onCall()">
+            <ion-icon name="call" slot="start"></ion-icon>
+            +91 9090909010
+          </ion-button>
+          <ion-button expand="block" fill="solid" (click)="onEmail()">
+            <ion-icon name="mail" slot="start"></ion-icon>
+            abc@test.com
+          </ion-button>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <!--Loan Form-->
+    <ion-row *ngIf="flag == 'loan'">
+      <ion-col size-xl="6" offset-xl="3">
+        <ion-list>
+          <ion-item class="input ion-margin-bottom" lines="none">
+            <ion-label>Installment Duration</ion-label>
+              <ion-select placeholder="Duration" (ionChange)="loanSelection($event)">
+                <ion-select-option *ngFor="let duration of durationList" [value]="duration">{{duration}}</ion-select-option>
+              </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

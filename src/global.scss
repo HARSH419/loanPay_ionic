@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,33 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.input {
+  --background: var(--ion-color-light);
+  border-radius: 8px;
+  --padding-start: 15px !important;
+  width: 100%;
+
+  ion-label {
+    display: none !important;
+  }
+
+  ion-select {
+    min-width: 100%;
+    padding: unset;
+  }
+
+  ion-select::part(icon) {
+    width: 20px;
+    color: var(--ion-color-tertiary);
+    opacity: 1;
+  }
+}
+
+.input.ion-touched.ion-invalid {
+  border: 1px solid var(--ion-color-danger);
+}
+
+.input.ion-touched.ion-valid {
+  border: 1px solid var(--ion-color-tertiary);
+}

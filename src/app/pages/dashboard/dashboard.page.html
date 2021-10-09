@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xl="6" offset-xl="3">
+        <ion-list>
+          <ion-list-header>Hello, {{user.name}}</ion-list-header>
+          <ion-card>
+            <ion-card-header color="primary">
+              <ion-card-subtitle>Today's Visit <span class="ion-float-right" routerLink="/visits">View All</span></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item lines="full" *ngFor="let visit of visitList">
+                  <ion-label>{{visit.name}}</ion-label>
+                  <ion-label>{{visit.amount}}</ion-label>
+                  <ion-button expand="block" fill="{{visit.status == 0 ? 'outline' : 'solid'}}" color="{{visit.status == 0 ? 'primary' : 'success'}}" [disabled]="visit.status == 1">
+                    {{visit.status == 0 ? 'Collect' : 'Collected'}}
+                  </ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-card routerLink="/add-client">
+              <ion-card-content class="ion-text-center" style="padding: 8% !important;">
+                <ion-icon name="add-circle" color="tertiary"></ion-icon>
+                <p>Add Client</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card routerLink="/profile">
+              <ion-card-content class="ion-text-center" style="padding: 8% !important;">
+                <ion-icon name="person" color="tertiary"></ion-icon>
+                <p>Profile</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card routerLink="/work-report">
+              <ion-card-content class="ion-text-center" style="padding: 8% !important;">
+                <ion-icon name="document" color="tertiary"></ion-icon>
+                <p>Work Report</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card routerLink="/settings">
+              <ion-card-content class="ion-text-center" style="padding: 8% !important;">
+                <ion-icon name="settings" color="tertiary"></ion-icon>
+                <p>Setting</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
