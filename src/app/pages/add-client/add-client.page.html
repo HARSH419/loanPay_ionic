@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="" defaulrHref="dashboard" color="primary"></ion-back-button>
+      <ion-back-button text="" defaultHref="dashboard" color="primary"></ion-back-button>
     </ion-buttons>
     <ion-title>Add Client</ion-title>
   </ion-toolbar>
@@ -9,9 +9,9 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="showForm">
       <ion-col size-xl="6" offset-xl="3">
-        <form [formGroup]="addClientForm" (ngSubmit)="login()">
+        <form [formGroup]="addClientForm" (ngSubmit)="verify()">
           <ion-list>
             <ion-item class="input ion-margin-bottom" lines="none">
               <ion-input formControlName="name" placeholder="User's Name" type="text"></ion-input>
@@ -20,85 +20,111 @@
               <ion-input formControlName="father_name" placeholder="Father's Name" type="text"></ion-input>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
-              <ion-input formControlName="mobile" placeholder="Mobile" type="tel"></ion-input>
+              <ion-input formControlName="mobile" placeholder="Mobile" type="tel" maxlength="10" minlength="10"></ion-input>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
-              <ion-textarea rows="4" formControlName="address" placeholder="Mobile" type="tel"></ion-textarea>
+              <ion-textarea rows="4" formControlName="address" placeholder="Address" type="tel"></ion-textarea>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
-              <ion-input formControlName="aadhaar" placeholder="Aadhaar Number" type="tel"></ion-input>
+              <ion-input formControlName="aadhar_number" placeholder="Aadhaar Number" type="tel" maxlength="12" minlength="12"></ion-input>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
-              <ion-input formControlName="pan" placeholder="Pan Card Number" type="text"></ion-input>
+              <ion-input formControlName="pan_number" placeholder="Pan Card Number" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="account" placeholder="Account Number" type="tel" minlength="10"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="ifsc" placeholder="IFSC Code" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-input formControlName="bank" placeholder="Bank Name" type="text"></ion-input>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
               <ion-label>Caste</ion-label>
               <ion-select formControlName="caste" placeholder="Caste">
-                <ion-select-option *ngFor="let caste of casteList" [value]="caste.id">{{caste.name}}</ion-select-option>
+                <ion-select-option *ngFor="let caste of casteList" [value]="caste.id">{{caste.caste}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="input ion-margin-bottom" lines="none">
+              <ion-label>Loan Type</ion-label>
+              <ion-select formControlName="loan_type_id" placeholder="Loan Type">
+                <ion-select-option *ngFor="let loan of loanTypeList" [value]="loan.id">{{loan.loan_type}}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
               <ion-label>Loan Amount</ion-label>
-              <ion-select formControlName="loan" placeholder="Loan Amount" (ionChange)="loanSelection($event)">
-                <ion-select-option *ngFor="let loan of loanList" [value]="loan">{{loan.amount}}</ion-select-option>
+              <ion-select formControlName="loan_id" placeholder="Loan Amount" (ionChange)="loanSelection($event)">
+                <ion-select-option *ngFor="let loan of loanList" [value]="loan.id">{{loan.loan_amount}}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-row>
-              <ion-col size="4">
-                <div class="image-box" (click)="onProductImage()">
-                  <div *ngIf="!base64Image">
+              <ion-col size="6">
+                <div class="image-box" (click)="onProductImage(1)">
+                  <div *ngIf="!userImage">
                     <p>
                       <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
                     </p>
                     Add User Image
                   </div>
-                  <img [src]="base64Image" *ngIf="base64Image" />
+                  <img [src]="userImage" *ngIf="userImage" />
                 </div>
               </ion-col>
-              <ion-col size="4">
-                <div class="image-box" (click)="onProductImage()">
-                  <div *ngIf="!base64Image">
+              <ion-col size="6">
+                <div class="image-box" (click)="onProductImage(2)">
+                  <div *ngIf="!aadhaar_front">
                     <p>
                       <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
                     </p>
-                    Add Aadhaar Image
+                    Add Aadhaar Front Image
                   </div>
-                  <img [src]="base64Image" *ngIf="base64Image" />
+                  <img [src]="aadhaar_front" *ngIf="aadhaar_front" />
                 </div>
               </ion-col>
-              <ion-col size="4">
-                <div class="image-box" (click)="onProductImage()">
-                  <div *ngIf="!base64Image">
+              <ion-col size="6">
+                <div class="image-box" (click)="onProductImage(3)">
+                  <div *ngIf="!aadhaar_back">
+                    <p>
+                      <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
+                    </p>
+                    Add Aadhaar Back Image
+                  </div>
+                  <img [src]="aadhaar_back" *ngIf="aadhaar_back" />
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="image-box" (click)="onProductImage(4)">
+                  <div *ngIf="!pan">
                     <p>
                       <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
                     </p>
                     Add Pan Card Image
                   </div>
-                  <img [src]="base64Image" *ngIf="base64Image" />
+                  <img [src]="pan" *ngIf="pan" />
                 </div>
               </ion-col>
             </ion-row>
             <ion-row *ngIf="show">
               <ion-col size="6">
-                <div class="image-box" (click)="onProductImage()">
-                  <div *ngIf="!base64Image">
+                <div class="image-box" (click)="onProductImage(5)">
+                  <div *ngIf="!ca">
                     <p>
                       <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
                     </p>
                     Add CA Image
                   </div>
-                  <img [src]="base64Image" *ngIf="base64Image" />
+                  <img [src]="ca" *ngIf="ca" />
                 </div>
               </ion-col>
               <ion-col size="6">
-                <div class="image-box" (click)="onProductImage()">
-                  <div *ngIf="!base64Image">
+                <div class="image-box" (click)="onProductImage(6)">
+                  <div *ngIf="!salary_slip">
                     <p>
                       <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
                     </p>
                     Add Salary Slip
                   </div>
-                  <img [src]="base64Image" *ngIf="base64Image" />
+                  <img [src]="salary_slip" *ngIf="salary_slip" />
                 </div>
               </ion-col>
             </ion-row>
@@ -111,6 +137,45 @@
             </ion-col>
           </ion-row>
         </form>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!showForm">
+      <ion-col size-xl="6" offset-xl="3">
+        <div class="bottom-part">
+          <div class="topHeader">
+            <ion-row>
+              <ion-col>
+                <h1>Enter your OTP</h1>
+                <!-- <form> -->
+                  <ion-row text-center>
+                    <ion-col class="ion-text-center" style="font-size: 28px;">
+                     <ion-input class="testOTP" #otp1 required maxLength="1" (keyup)="otpController($event,otp2,'')" [(ngModel)]="opt1" type="tel">
+                     </ion-input>
+                     <ion-input class="testOTP" #otp2 required maxLength="1" (keyup)="otpController($event,otp3,otp1)" [(ngModel)]="opt2" type="tel">
+                     </ion-input>
+                     <ion-input class="testOTP" #otp3 required maxLength="1" (keyup)="otpController($event,otp4,otp2)" [(ngModel)]="opt3" type="tel">
+                     </ion-input>
+                     <ion-input class="testOTP" #otp4  required maxLength="1" (keyup)="otpController($event,otp5,otp3)" [(ngModel)]="opt4" type="tel">
+                     </ion-input>
+                     <ion-input class="testOTP" #otp5  required maxLength="1" (keyup)="otpController($event,'',otp4)" style="display: none;" type="tel">
+                     </ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col class="ion-text-end" (click)="onResendOTP()">
+                      <p><span>Resend OTP</span></p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col class="ion-text-center">
+                      <ion-button type="submit" shape="round" class="lengthy" (click)="OTPVerify()">Submit</ion-button>
+                    </ion-col>
+                  </ion-row>
+                <!-- </form> -->
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

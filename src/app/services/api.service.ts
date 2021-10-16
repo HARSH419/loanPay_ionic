@@ -44,14 +44,124 @@ export class ApiService {
   //   });
   // }
   
-  // async loanAmount() {
-  //   return new Promise((resolve, reject) => {
-  //     this.requestManager.get('loan-amounts').subscribe((data: any) => {
-  //       resolve(data);
-  //     }, (err) => {
-  //       console.log(err);
-  //       reject(new Error(err.error, err.status));
-  //     });
-  //   });
-  // }
+  async loanType() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('loan-type').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+
+  async loanAmount() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('loan-amounts').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async casteList() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('caste').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async loanAmountDetails(id) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get(`loan-amount/${id}`).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async getExecutiveFee() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('executive-fee').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async subsidy() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('subsidy').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async otpVerify(formData) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.post('verify-mobile', formData).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async verify(formData) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.post('verify-otp-register', formData).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async workReport(formData) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.post('add-work-report', formData).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async submitQuery(formData) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.post('add-enquiry', formData).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async getContacts() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('contacts').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
 }

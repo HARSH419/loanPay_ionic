@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
       this.api.login(this.loginForm.value).then((data: any) => {
         this.navCtrl.navigateRoot('/dashboard');
       }).catch(err => {
-        this.commonService.showAlert(AlertTypeEnum.Error, err.status);
+        this.commonService.showAlert(AlertTypeEnum.Error, err.message);
       });
       this.commonService.hideLoader();
     }

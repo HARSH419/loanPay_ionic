@@ -1,16 +1,40 @@
 ion-card {
-    margin: 8px !important;
-    ion-card-header {
-        padding: 4%;
+  margin: 8px !important;
+  ion-card-header {
+    padding: 4%;
+  }
+  ion-card-content {
+    padding: 2%;
+    ion-icon {
+      font-size: 2rem;
     }
-    ion-card-content {
-        padding: 2%;
-        ion-icon {
-            font-size: 2rem;
-        }
-        p {
-            font-size: 1rem;
-            font-weight: 600;
-        }
+    p {
+      font-size: 1rem;
+      font-weight: 600;
     }
+  }
+}
+
+.css-item {
+  border-top: 1px dashed #636363;
+  margin-top: 2%;
+  --background: var(--ion-color-light);
+  --padding-start: 15px !important;
+  width: 100%;
+  padding-top: 5%;
+
+  ion-label {
+    font-weight: bold;
+  }
+}
+
+.item-detail {
+  --background: var(--ion-color-light);
+  border-radius: 8px;
+  --padding-start: 15px !important;
+  width: 100%;
+
+  ion-label {
+    font-weight: 500;
+  }
 }

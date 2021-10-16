@@ -25,13 +25,13 @@
                   <ion-input formControlName="name" placeholder="Name" type="text"></ion-input>
                 </ion-item>
                 <ion-item class="input ion-margin-bottom" lines="none">
-                  <ion-input formControlName="mobile" placeholder="Mobile" type="tel"></ion-input>
+                  <ion-input formControlName="mobile" placeholder="Mobile" type="tel" minlength="10" maxlength="10"></ion-input>
                 </ion-item>
                 <ion-item class="input ion-margin-bottom" lines="none">
                   <ion-input formControlName="email" placeholder="Email" type="email"></ion-input>
                 </ion-item>
                 <ion-item class="input ion-margin-bottom" lines="none">
-                  <ion-textarea rows="4" formControlName="query" placeholder="Query" type="text"></ion-textarea>
+                  <ion-textarea rows="4" formControlName="remark" placeholder="Query" type="text"></ion-textarea>
                 </ion-item>
               </ion-list>
               <ion-row>
@@ -42,17 +42,17 @@
             </form>
           </ion-card-content>
         </ion-card>
-        <ion-list>
+        <ion-list *ngIf="number_call">
           <ion-list-header style="padding-inline-start: 0 !important;">
             <ion-label class="ion-text-center">-- OR --</ion-label>
           </ion-list-header>
           <ion-button expand="block" fill="outline" class="ion-margin-vertical" (click)="onCall()">
             <ion-icon name="call" slot="start"></ion-icon>
-            +91 9090909010
+            +91 {{number_call}}
           </ion-button>
           <ion-button expand="block" fill="solid" (click)="onEmail()">
             <ion-icon name="mail" slot="start"></ion-icon>
-            abc@test.com
+            {{email_call}}
           </ion-button>
         </ion-list>
       </ion-col>
@@ -65,11 +65,52 @@
           <ion-item class="input ion-margin-bottom" lines="none">
             <ion-label>Installment Duration</ion-label>
               <ion-select placeholder="Duration" (ionChange)="loanSelection($event)">
-                <ion-select-option *ngFor="let duration of durationList" [value]="duration">{{duration}}</ion-select-option>
+                <ion-select-option *ngFor="let duration of durationList" [value]="duration.id">{{duration.installment_time}} months</ion-select-option>
               </ion-select>
           </ion-item>
+          <div *ngIf="showDetail">
+            <ion-item class="ion-margin-bottom item-detail" lines="none">
+              <ion-label>Installment Duration:</ion-label>
+              <ion-input type="text" readonly="true" value="{{selectedDurationData.installment_time}} months" class="ion-text-right"></ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-bottom item-detail" lines="none">
+              <ion-label>Installment Interest:</ion-label>
+              <ion-input type="text" readonly="true" value="{{selectedDurationData.installment_amount}}%" class="ion-text-right"></ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-bottom item-detail" lines="none">
+              <ion-label>Intrest Amount:</ion-label>
+              <ion-input type="text" readonly="true" value="{{selectedDurationData.interest_amount | currency:'INR'}}" class="ion-text-right"></ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-bottom item-detail" lines="none">
+              <ion-label>Subsidy:</ion-label>
+              <ion-select placeholder="Subsidy" (ionChange)="subsidySelection($event)">
+                <ion-select-option *ngFor="let subsidy of subsidyList" [value]="subsidy">{{subsidy.subsidy}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item class="ion-margin-bottom item-detail" lines="none">
+              <ion-label>Executive Fee:</ion-label>
+              <ion-input type="text" readonly="true" value="{{fee | currency:'INR'}}" class="ion-text-right"></ion-input>
+            </ion-item>
+            <ion-item class="ion-margin-bottom css-item" lines="none">
+              <ion-label>Total Payable Amount:</ion-label>
+              <ion-input type="text" readonly="true" value="{{totalPayableAmount | currency:'INR'}}" class="ion-text-right"></ion-input>
+            </ion-item>
+          </div>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer *ngIf="showDetail">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="outline" color="danger" expand="block" (click)="onReject()">Reject</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button fill="solid" color="primary" expand="block" (click)="onApprove()">Approve</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

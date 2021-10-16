@@ -15,12 +15,13 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpConfigInterceptor } from './services/http.config.interceptor';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
-  providers: [CallNumber, EmailComposer, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+  providers: [CallNumber, EmailComposer, Camera, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

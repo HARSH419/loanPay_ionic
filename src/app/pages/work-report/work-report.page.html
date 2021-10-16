@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="" defaulrHref="dashboard" color="primary"></ion-back-button>
+      <ion-back-button text="" defaultHref="dashboard" color="primary"></ion-back-button>
     </ion-buttons>
     <ion-title>Report</ion-title>
   </ion-toolbar>
@@ -17,7 +17,7 @@
               <ion-input formControlName="name" placeholder="Client's Name" type="text"></ion-input>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
-              <ion-input formControlName="mobile" placeholder="Client's Mobile" type="tel"></ion-input>
+              <ion-input formControlName="mobile" placeholder="Client's Mobile" type="tel" minlength="10" maxlength="10"></ion-input>
             </ion-item>
             <ion-item class="input ion-margin-bottom" lines="none">
               <ion-input formControlName="email" placeholder="Client's Email" type="email"></ion-input>

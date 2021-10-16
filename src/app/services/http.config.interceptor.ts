@@ -22,7 +22,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = '';
 
-    console.log('USER: ', this.commonService.user.value);
+    // console.log('USER: ', this.commonService.user.value);
     // Authentication by setting header with token value
     if (this.commonService.user.value && this.commonService.user.value.token) {
       request = request.clone({
@@ -30,7 +30,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             Authorization: 'Bearer ' + this.commonService.user.value.token
         },
       });
-      console.log('request header: ', request.headers);
+      // console.log('request header: ', request.headers);
     }
 
     if (!request.headers.has('Content-Type')) {
@@ -48,7 +48,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log('event--->>>', event);
+          // console.log('event--->>>', event);
         }
         this.commonService.hideLoader();
         return event;

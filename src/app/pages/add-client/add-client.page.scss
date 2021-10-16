@@ -9,3 +9,71 @@
     font-size: xx-large;
   }
 }
+
+.topHeader {
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  width: 90%;
+  text-align: center;
+
+  h3 {
+    color: var(--ion-color-medium);
+  }
+
+  ion-button {
+    margin-top: 2rem;
+    width: 65%;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.centerIMG {
+  width: 80%;
+}
+
+.bottom-part {
+  background: var(--ion-color-blue);
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 70%;
+  h1 {
+    text-align: center;
+    color: var(--ion-color-medium);
+    font-size: 32px !important;
+    font-weight: bold;
+    margin-top: 0 !important;
+    margin-bottom: 2.5rem;
+  }
+  ion-list {
+    display: contents !important;
+  }
+  p {
+    color: var(--ion-color-light);
+  }
+  span {
+    color: var(--ion-color-primary);
+    font-weight: 600;
+  }
+}
+
+.testOTP {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 25%;
+  --background: var(--ion-color-light);
+  --padding-start: 10px;
+  text-align: center;
+}

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class RequestManagerService {
 
-  url: string = 'https://714a-122-160-47-222.ngrok.io/api/';
+  url: string = 'https://551b-122-160-47-222.ngrok.io/api/';
 
   constructor(
     private http: HttpClient,

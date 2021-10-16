@@ -30,6 +30,7 @@ export class ProfilePage implements OnInit {
     this.profileForm.patchValue({
       'name': this.userData.name,
       'mobile': this.userData.mobile,
+      'email': this.userData.email,
       'address': this.userData.address,
       'aadhaar': this.userData.aadhar_number,
       'pan': this.userData.pan_number
@@ -41,7 +42,8 @@ export class ProfilePage implements OnInit {
       {
         name: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3)])),
         mobile: new FormControl('', Validators.compose([Validators.required])),
-        address: new FormControl('', Validators.compose([Validators.required, Validators.minLength(12)])),
+        email: new FormControl('', Validators.compose([Validators.required])),
+        address: new FormControl('', Validators.compose([Validators.required])),
         aadhaar: new FormControl('', Validators.compose([Validators.required])),
         pan: new FormControl('', Validators.compose([Validators.required])),
       },
