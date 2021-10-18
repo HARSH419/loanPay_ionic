@@ -1,3 +1,6 @@
+import { CameraService } from './../../services/camera.service';
+import { AlertTypeEnum } from 'src/app/services/error-handler/alert-type.enum';
+import { ApiService } from './../../services/api.service';
 import { userInterface } from './../../models/user/user.interface';
 import { CommonService } from './../../services/common.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,12 +17,16 @@ export class DashboardPage implements OnInit {
   total_approved = 3;
   total_clients_pending = 2;
   visitList: any = [];
+  stat: any = {};
 
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private api: ApiService,
+    private cameraService: CameraService
   ) { }
 
   ngOnInit() {
+    this.getStats();
     this.commonService.user.subscribe((data: any) => {
       console.log(data);
       this.userData = data.user;
@@ -52,8 +59,24 @@ export class DashboardPage implements OnInit {
     ]
   }
 
+  async getStats() {
+    this.api.getStats().then((data: any) => {
+      console.log(data);
+      if (data.status == 200) {
+        this.stat = data.data;
+      }
+    }).catch(err => {
+      this.commonService.showAlert(AlertTypeEnum.Error, err.message);
+    });
+  }
+
   onViewAll() {
     
+  }
+
+  Test() {
+    var data: any;
+    data = this.cameraService.takePhoto();
   }
 
 }

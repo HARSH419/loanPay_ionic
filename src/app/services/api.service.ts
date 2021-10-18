@@ -164,4 +164,15 @@ export class ApiService {
       });
     });
   }
+  
+  async getStats() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('stats').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
 }

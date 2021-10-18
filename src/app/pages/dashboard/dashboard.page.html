@@ -43,19 +43,19 @@
               <ion-row class="row-css">
                 <ion-col class="col-css">
                   <div class="div-css">
-                    <h2>5</h2>
+                    <h2>{{stat.total_request}}</h2>
                   </div>
                   <ion-label>Visited</ion-label>
                 </ion-col>
                 <ion-col class="col-css">
                   <div class="div-css">
-                    <h2>3</h2>
+                    <h2>{{stat.visited}}</h2>
                   </div>
                   <ion-label>Added</ion-label>
                 </ion-col>
                 <ion-col class="col-css">
                   <div class="div-css">
-                    <h2>2</h2>
+                    <h2>{{stat.pending_request}}</h2>
                   </div>
                   <ion-label>Pending</ion-label>
                 </ion-col>
@@ -98,6 +98,14 @@
               </ion-card-content>
             </ion-card>
           </ion-col>
+          <!-- <ion-col>
+            <ion-card (click)="Test()">
+              <ion-card-content class="ion-text-center" style="padding: 8% !important;">
+                <ion-icon name="settings" color="tertiary"></ion-icon>
+                <p>Test</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col> -->
         </ion-row>
       </ion-col>
     </ion-row>
