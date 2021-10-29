@@ -1,9 +1,10 @@
-import { CameraService } from './../../services/camera.service';
-import { AlertTypeEnum } from 'src/app/services/error-handler/alert-type.enum';
-import { ApiService } from './../../services/api.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { userInterface } from './../../models/user/user.interface';
 import { CommonService } from './../../services/common.service';
-import { Component, OnInit } from '@angular/core';
+import { AlertTypeEnum } from '../../services/error-handler/alert-type.enum';
+import { ApiService } from './../../services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,50 +14,40 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardPage implements OnInit {
 
   userData: userInterface
-  total_visits = 5;
-  total_approved = 3;
-  total_clients_pending = 2;
+  total_visits = 0;
+  total_approved = 0;
+  total_clients_pending = 0;
   visitList: any = [];
   stat: any = {};
 
   constructor(
     private commonService: CommonService,
     private api: ApiService,
-    private cameraService: CameraService
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getStats();
     this.commonService.user.subscribe((data: any) => {
       console.log(data);
       this.userData = data.user;
     });
-    this.visitList = [
-      {
-        id: 1,
-        name: 'John Doe',
-        amount: '$200',
-        status: 0,
-      },
-      {
-        id: 2,
-        name: 'Jane Doe',
-        amount: '$300',
-        status: 0,
-      },
-      {
-        id: 3,
-        name: 'Benjamin',
-        amount: '$250',
-        status: 0,
-      },
-      {
-        id: 4,
-        name: 'Harley',
-        amount: '$2000',
-        status: 1,
-      },
-    ]
+  }
+  
+  ionViewWillEnter() {
+    this.visitList = [];
+    this.getStats();
+    this.getRepay();
+  }
+
+  async getRepay() {
+    this.api.dashboardRepayment().then((data: any) => {
+      console.log(data);
+      if (data.status == 200) {
+        this.visitList = data.data;
+      }
+    }).catch(err => {
+      this.commonService.showAlert(AlertTypeEnum.Error, err.message);
+    });
   }
 
   async getStats() {
@@ -70,13 +61,8 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  onViewAll() {
-    
-  }
-
-  Test() {
-    var data: any;
-    data = this.cameraService.takePhoto();
+  repay(id) {
+    this.router.navigateByUrl('/repayment/'+JSON.stringify(id));
   }
 
 }

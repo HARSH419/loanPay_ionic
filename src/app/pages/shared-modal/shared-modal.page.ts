@@ -1,12 +1,13 @@
-import { ApiService } from './../../services/api.service';
-import { CommonService } from './../../services/common.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController, AlertController, NavController } from '@ionic/angular';
 
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
-import { AlertTypeEnum } from 'src/app/services/error-handler/alert-type.enum';
+
+import { ApiService } from './../../services/api.service';
+import { CommonService } from './../../services/common.service';
+import { AlertTypeEnum } from '../../services/error-handler/alert-type.enum';
 
 @Component({
   selector: 'app-shared-modal',
@@ -19,6 +20,7 @@ export class SharedModalPage implements OnInit {
   @Input() loan_id: any;
   title: string;
   queryForm: FormGroup;
+  paymentList: any = [];
   loanApprovalForm: FormGroup;
   durationList: any = [];
   selectedDurationData: any = {};
@@ -52,8 +54,11 @@ export class SharedModalPage implements OnInit {
       // this._buildFormLoan();
       this.showDetail = false;
       this.getLoanDetails();
+    } else if (this.flag == 'payment') {
+      this.title = 'Payment Options';
+      this.getPaymentOptions();
     } else {
-      this.title = 'Error';
+      this.title = "Error"
     }
 
   }
@@ -145,7 +150,7 @@ export class SharedModalPage implements OnInit {
       if (data.id == event.detail.value) {
         this.selectedDurationData = data;
         this.totalPayableAmount = this.selectedDurationData.payable_amount + this.fee;
-        console.log(this.selectedDurationData);
+        console.log('Selected: ', this.selectedDurationData);
       }
     }));
   }
@@ -204,6 +209,18 @@ export class SharedModalPage implements OnInit {
         this.commonService.showAlert(AlertTypeEnum.Error, err.message);
       });
     }
+  }
+
+  async getPaymentOptions() {
+    this.commonService.showLoader();
+    this.api.paymentMethods().then((data: any) => {
+      console.log(data);
+      if (data.status == 200) {
+        this.paymentList = data.data;
+      }
+    }).catch(err => {
+      this.commonService.showAlert(AlertTypeEnum.Error, err.message);
+    });
   }
 
 }

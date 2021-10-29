@@ -49,6 +49,18 @@ const routes: Routes = [
     path: 'shared-modal',
     loadChildren: () => import('./pages/shared-modal/shared-modal.module').then( m => m.SharedModalPageModule)
   },
+  {
+    path: 'request-list',
+    loadChildren: () => import('./pages/request-list/request-list.module').then( m => m.RequestListPageModule)
+  },
+  {
+    path: 'repayment/:id',
+    loadChildren: () => import('./pages/repayment/repayment.module').then( m => m.RepaymentPageModule)
+  },
+  {
+    path: 'detail/:id',
+    loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule)
+  },
 ];
 
 @NgModule({

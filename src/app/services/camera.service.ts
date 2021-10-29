@@ -31,4 +31,6 @@ export class CameraService {
       // this.commonService.showAlert(AlertTypeEnum.Error, err);
      });
   }
+
+
 }

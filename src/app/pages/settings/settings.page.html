@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="dashboard" color="primary"></ion-back-button>
+      <ion-back-button text="" defaultHref="dashboard" color="light"></ion-back-button>
     </ion-buttons>
     <ion-title>Settings</ion-title>
   </ion-toolbar>
@@ -12,20 +12,24 @@
     <ion-row>
       <ion-col size-xl="6" offset-xl="3">
         <ion-list>
-          <ion-item lines="full" detail button (click)="onSupport()">
-            <ion-icon name="build" slot="start" color="tertiary"></ion-icon>
+          <ion-item lines="full" detail button (click)="onSupport(1)">
+            <ion-icon name="build" slot="start" color="darkion"></ion-icon>
             <ion-label>Customer Support</ion-label>
           </ion-item>
-          <ion-item lines="full" detail button>
-            <ion-icon name="document-lock" slot="start" color="tertiary"></ion-icon>
+          <ion-item lines="full" detail button (click)="onSupport(2)">
+            <ion-icon name="wallet" slot="start" color="darkion"></ion-icon>
+            <ion-label>Payment Options</ion-label>
+          </ion-item>
+          <ion-item lines="full" detail button (click)="openURL('https://loanpay.co.in/loan-page/privacy')">
+            <ion-icon name="document-lock" slot="start" color="darkion"></ion-icon>
             <ion-label>Privacy Policy</ion-label>
           </ion-item>
-          <ion-item lines="full" detail button>
-            <ion-icon name="reader" slot="start" color="tertiary"></ion-icon>
+          <ion-item lines="full" detail button (click)="openURL('https://loanpay.co.in/loan-page/terms_condition')">
+            <ion-icon name="reader" slot="start" color="darkion"></ion-icon>
             <ion-label>Terms & Conditions</ion-label>
           </ion-item>
           <ion-item lines="full" detail button (click)="onLogout()">
-            <ion-icon name="exit" slot="start" color="tertiary"></ion-icon>
+            <ion-icon name="exit" slot="start" color="darkion"></ion-icon>
             <ion-label>Logout</ion-label>
           </ion-item>
         </ion-list>

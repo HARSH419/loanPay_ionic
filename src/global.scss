@@ -25,6 +25,24 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+:root {
+  --ion-color-darkion: #505050;
+  --ion-color-darkion-rgb: 80,80,80;
+  --ion-color-darkion-contrast: #ffffff;
+  --ion-color-darkion-contrast-rgb: 255,255,255;
+  --ion-color-darkion-shade: #464646;
+  --ion-color-darkion-tint: #626262;
+}
+
+.ion-color-darkion {
+  --ion-color-base: var(--ion-color-darkion);
+  --ion-color-base-rgb: var(--ion-color-darkion-rgb);
+  --ion-color-contrast: var(--ion-color-darkion-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-darkion-contrast-rgb);
+  --ion-color-shade: var(--ion-color-darkion-shade);
+  --ion-color-tint: var(--ion-color-darkion-tint);
+}
+
 .input {
   --background: var(--ion-color-light);
   border-radius: 8px;
@@ -54,3 +72,8 @@
 .input.ion-touched.ion-valid {
   border: 1px solid var(--ion-color-tertiary);
 }
+
+.back-grad {
+  --background: linear-gradient(to left, #4F9AFA, #4791F1, #3E89E7, #3680DE, #2C78D5) !important;
+}
+

@@ -1,0 +1,14 @@
+ion-card {
+    margin: 1%;
+    ion-card-header {
+        padding: 3%;
+        ion-button {
+            height: 25px;
+        }
+    }
+}
+
+.bold-label {
+    font-weight: bold;
+    color: var(--ion-color-dark);
+}

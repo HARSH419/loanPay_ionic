@@ -1,6 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Dashboard</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button routerLink="/visits">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -9,52 +14,27 @@
     <ion-row>
       <ion-col size-xl="6" offset-xl="3">
         <ion-list>
-          <ion-list-header>Hello, {{userData.name | titlecase}}</ion-list-header>
+          <ion-list-header mode="ios">Hello, {{userData.name | titlecase}}</ion-list-header>
           <ion-card>
-            <ion-card-header color="primary">
-              <ion-card-subtitle>Today's Visit</ion-card-subtitle>
+            <ion-card-header class="back-grad">
+              <ion-card-subtitle color="light">Today's Visit</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
-              <!-- <ion-list>
-                <ion-item lines="full">
-                  <ion-label>{{visit.name}}</ion-label>
-                  <ion-label>{{visit.amount}}</ion-label>
-                  <ion-button expand="block" fill="{{visit.status == 0 ? 'outline' : 'solid'}}" color="{{visit.status == 0 ? 'primary' : 'success'}}" [disabled]="visit.status == 1">
-                    {{visit.status == 0 ? 'Collect' : 'Collected'}}
-                  </ion-button>
-                  <h2>{{total_visits}}</h2>
-                  <p>
-                    client's visit are done for today
-                  </p>
-                </ion-item>
-                <ion-item lines="full">
-                  <h2>{{total_approved}}</h2>
-                  <ion-label>
-                    client's added for today
-                  </ion-label>
-                </ion-item>
-                <ion-item lines="full">
-                  <h2>{{total_clients_pending}}</h2>
-                  <ion-label>
-                    client's are pending for evaluation
-                  </ion-label>
-                </ion-item>
-              </ion-list> -->
               <ion-row class="row-css">
                 <ion-col class="col-css">
-                  <div class="div-css">
+                  <div class="div-css" style="border: 5px solid #FEE4DF;">
                     <h2>{{stat.total_request}}</h2>
                   </div>
                   <ion-label>Visited</ion-label>
                 </ion-col>
                 <ion-col class="col-css">
-                  <div class="div-css">
+                  <div class="div-css" style="border: 5px solid #ffddae;">
                     <h2>{{stat.visited}}</h2>
                   </div>
                   <ion-label>Added</ion-label>
                 </ion-col>
                 <ion-col class="col-css">
-                  <div class="div-css">
+                  <div class="div-css" style="border: 5px solid #CEEAFF;">
                     <h2>{{stat.pending_request}}</h2>
                   </div>
                   <ion-label>Pending</ion-label>
@@ -62,50 +42,63 @@
               </ion-row>
             </ion-card-content>
           </ion-card>
+          <ion-card *ngIf="visitList.length > 0">
+            <ion-card-content>
+              <ion-list>
+                <ion-item lines="full" *ngFor="let visit of visitList">
+                  <ion-label>{{visit.name}}</ion-label>
+                  <ion-label>{{visit.repayment_time}}</ion-label>
+                  <ion-button expand="block" fill="{{visit.status == 1 ? 'outline' : 'solid'}}" color="{{visit.status == 1 ? 'primary' : 'success'}}" [disabled]="visit.status == 2" (click)="repay(visit.id)">
+                    {{visit.status == 1 ? 'Collect' : 'Collected'}}
+                  </ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
         </ion-list>
         <ion-row>
           <ion-col>
-            <ion-card routerLink="/add-client">
+            <ion-card routerLink="/add-client" style="--background: #FEE4DF">
               <ion-card-content class="ion-text-center" style="padding: 8% !important;">
-                <ion-icon name="add-circle" color="tertiary"></ion-icon>
+                <ion-icon name="add-circle" color="darkion"></ion-icon>
                 <p>Add Client</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
           <ion-col>
-            <ion-card routerLink="/profile">
+            <ion-card routerLink="/profile" style="--background: #CEEAFF">
               <ion-card-content class="ion-text-center" style="padding: 8% !important;">
-                <ion-icon name="person" color="tertiary"></ion-icon>
+                <ion-icon name="person" color="darkion"></ion-icon>
                 <p>Profile</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
-            <ion-card routerLink="/work-report">
+          <ion-col size="6">
+            <ion-card routerLink="/work-report" style="--background: #ffddae">
               <ion-card-content class="ion-text-center" style="padding: 8% !important;">
-                <ion-icon name="document" color="tertiary"></ion-icon>
+                <ion-icon name="document" color="darkion"></ion-icon>
                 <p>Work Report</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
-          <ion-col>
-            <ion-card routerLink="/settings">
+          <ion-col size="6">
+            <ion-card routerLink="/request-list" style="--background: #FEE4DF">
               <ion-card-content class="ion-text-center" style="padding: 8% !important;">
-                <ion-icon name="settings" color="tertiary"></ion-icon>
-                <p>Setting</p>
+                <ion-icon name="documents" color="darkion"></ion-icon>
+                <p>Loan Requests</p>
               </ion-card-content>
             </ion-card>
           </ion-col>
-          <!-- <ion-col>
-            <ion-card (click)="Test()">
+          <ion-col size="6">
+            <ion-card routerLink="/settings" style="--background: #CEEAFF">
               <ion-card-content class="ion-text-center" style="padding: 8% !important;">
-                <ion-icon name="settings" color="tertiary"></ion-icon>
-                <p>Test</p>
+                <ion-icon name="settings" color="darkion"></ion-icon>
+                <p>Settings</p>
               </ion-card-content>
             </ion-card>
-          </ion-col> -->
+          </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>

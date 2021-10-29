@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="dashboard" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Loan Request List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xl="6" offset-xl="3">
+        <ion-card *ngFor="let person of loanList">
+          <ion-card-header class="back-grad">
+            <ion-card-title color="light">
+              {{person.client_name | titlecase}}
+              <span class="ion-float-right" style="font-size: 14px;">{{person.request_date | date}}</span>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="5" class="bold-label" style="color: var(--ion-color-danger) !important">Loan ID. </ion-col>
+              <ion-col size="1">:</ion-col>
+              <ion-col size="6" class="ion-text-wrap">{{person.loan_key}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="bold-label">Account No. </ion-col>
+              <ion-col size="1">:</ion-col>
+              <ion-col size="6" class="ion-text-wrap">{{person.account_number}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="bold-label">Address </ion-col>
+              <ion-col size="1">:</ion-col>
+              <ion-col size="6">{{person.address}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="bold-label">Loan Amount </ion-col>
+              <ion-col size="1">:</ion-col>
+              <ion-col size="6">{{person.loan_amount}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5" class="bold-label">Total Payable </ion-col>
+              <ion-col size="1">:</ion-col>
+              <ion-col size="6">{{person.payable_amount}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button expand="block" fill="{{person.is_file_charge_paid == 0 ? 'outline' : 'solid'}}" color="{{person.is_file_charge_paid == 0 ? 'danger' : 'dark'}}" [disabled]="person.is_file_charge_paid == 1" (click)="onUpdate(person.id)">{{person.is_file_charge_paid == '0' ? 'Collect File Charge' : 'Collected'}}</ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button expand="block" fill="solid" color="success" (click)="onDetail(person.id)">Detail</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

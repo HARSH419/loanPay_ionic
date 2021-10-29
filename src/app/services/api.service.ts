@@ -43,6 +43,17 @@ export class ApiService {
   //     });
   //   });
   // }
+
+  async dashboardRepayment() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('pending-repayments').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
   
   async loanType() {
     return new Promise((resolve, reject) => {
@@ -168,6 +179,61 @@ export class ApiService {
   async getStats() {
     return new Promise((resolve, reject) => {
       this.requestManager.get('stats').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async getLoanRequestList() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('loan-requests').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async getLoanRequestDetail(id) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get(`loan-request/${id}`).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async updateStatus(id, formData) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.post(`update-loan-request-status/${id}`, formData).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async paymentMethods() {
+    return new Promise((resolve, reject) => {
+      this.requestManager.get('payment-methods').subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log(err);
+        reject(new Error(err.error, err.status));
+      });
+    });
+  }
+  
+  async repaymentCollection(id, formData) {
+    return new Promise((resolve, reject) => {
+      this.requestManager.post(`repayment-collect/${id}`, formData).subscribe((data: any) => {
         resolve(data);
       }, (err) => {
         console.log(err);

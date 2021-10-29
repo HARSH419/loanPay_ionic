@@ -1,8 +1,9 @@
-import { ApiService } from './../../services/api.service';
-import { CommonService } from './../../services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertTypeEnum } from 'src/app/services/error-handler/alert-type.enum';
+
+import { ApiService } from './../../services/api.service';
+import { CommonService } from './../../services/common.service';
+import { AlertTypeEnum } from '../../services/error-handler/alert-type.enum';
 
 @Component({
   selector: 'app-work-report',

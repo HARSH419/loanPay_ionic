@@ -1,7 +1,8 @@
-import { CommonService } from './../../services/common.service';
-import { SharedModalPage } from './../shared-modal/shared-modal.page';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
+
+import { CommonService } from './../../services/common.service';
+import { SharedModalPage } from './../shared-modal/shared-modal.page';
 
 @Component({
   selector: 'app-settings',
@@ -19,10 +20,10 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
   }
 
-  async onSupport() {
+  async onSupport(flag) {
     const modal = await this.modalCtrl.create({
       component: SharedModalPage,
-      componentProps: {'flag': 'support'},
+      componentProps: {'flag': flag == 1 ? 'support' : 'payment'},
       swipeToClose: true
     });
     modal.present();
@@ -33,6 +34,10 @@ export class SettingsPage implements OnInit {
       window.localStorage.clear();
       this.navCtrl.navigateRoot('/home');
     });
+  }
+
+  openURL(link: string) {
+    window.open(link);
   }
 
 }

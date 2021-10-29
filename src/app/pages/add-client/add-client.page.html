@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="dashboard" color="primary"></ion-back-button>
+      <ion-back-button text="" defaultHref="dashboard" color="light"></ion-back-button>
     </ion-buttons>
     <ion-title>Add Client</ion-title>
   </ion-toolbar>
@@ -55,7 +55,7 @@
             <ion-item class="input ion-margin-bottom" lines="none">
               <ion-label>Loan Amount</ion-label>
               <ion-select formControlName="loan_id" placeholder="Loan Amount" (ionChange)="loanSelection($event)">
-                <ion-select-option *ngFor="let loan of loanList" [value]="loan.id">{{loan.loan_amount}}</ion-select-option>
+                <ion-select-option *ngFor="let loan of loanList" [value]="loan.id">{{loan.loan_amount | currency: 'INR'}}</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-row>
@@ -68,6 +68,17 @@
                     Add User Image
                   </div>
                   <img [src]="userImage" *ngIf="userImage" />
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="image-box" (click)="onProductImage(7)">
+                  <div *ngIf="!passbook">
+                    <p>
+                      <ion-icon name="camera-outline" color="primary" slot="start"></ion-icon>
+                    </p>
+                    Add Passbook
+                  </div>
+                  <img [src]="passbook" *ngIf="passbook" />
                 </div>
               </ion-col>
               <ion-col size="6">

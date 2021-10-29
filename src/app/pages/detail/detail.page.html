@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-card>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size="5" class="bold-label" style="color: var(--ion-color-danger) !important">Loan ID. </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="ion-text-wrap">{{detail.loan_key}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Name. </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.client_name}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Mobile. </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.client_mobile}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Aadhaar No. </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.aadhar_number}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Pan No. </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.pan_number}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Address </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.address}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Account No. </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="ion-text-wrap">{{detail.account_number}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Bank </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.bank_name}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Interest Amount </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.interest_amount | currency: 'INR'}}</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5" class="bold-label">Duration </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.installment_time}}</ion-col>
+              </ion-row>
+              <ion-row style="border-top: 1px solid var(--ion-color-medium);">
+                <ion-col size="5" class="bold-label">Payable Amount </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6">{{detail.payable_amount | currency: 'INR'}}</ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+          <ion-list class="ion-margin-top">
+            <ion-item lines="full" *ngFor="let repay of detail.repayments" (click)="onRepay(repay.status, repay.id)">
+              <ion-label>
+                <b>Due Date:</b> 
+                <span class="ion-margin-start">{{repay.repayment_time}}</span> 
+                <span *ngIf="repay.status == 2" class="ion-float-right">
+                  <ion-icon name="checkmark" color="success"></ion-icon>
+                </span>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

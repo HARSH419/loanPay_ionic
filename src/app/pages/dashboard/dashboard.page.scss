@@ -30,7 +30,6 @@ ion-card {
 
 .div-css {
   border-radius: 50%;
-  border: 5px solid var(--ion-color-medium);
   height: 60px;
   width: 60px;
   padding: 5%;
@@ -39,4 +38,8 @@ ion-card {
     font-size: 30px;
     font-weight: bold;
   }
+}
+
+.back-grad {
+  --background: linear-gradient(to left, #4F9AFA, #4791F1, #3E89E7, #3680DE, #2C78D5) !important;
 }

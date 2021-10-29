@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CommonService } from './../../services/common.service';
 import { ApiService } from './../../services/api.service';
 import { userInterface } from './../../models/user/user.interface';
-import { AlertTypeEnum } from '../../services/error-handler/alert-type.enum';
 
 @Component({
   selector: 'app-profile',
@@ -48,6 +47,10 @@ export class ProfilePage implements OnInit {
         pan: new FormControl('', Validators.compose([Validators.required])),
       },
     );
+  }
+
+  async update() {
+    console.log('Not a function!!');
   }
 
 }

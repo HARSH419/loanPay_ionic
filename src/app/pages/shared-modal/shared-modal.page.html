@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="onClose()">
-        <ion-icon name="close" slot="icon-only" color="primary"></ion-icon>
+        <ion-icon name="close" slot="icon-only" color="light"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>{{title}}</ion-title>
@@ -91,11 +91,35 @@
               <ion-label>Executive Fee:</ion-label>
               <ion-input type="text" readonly="true" value="{{fee | currency:'INR'}}" class="ion-text-right"></ion-input>
             </ion-item>
+            <ion-item class="ion-margin-bottom item-detail" lines="none">
+              <ion-label>File Charge:</ion-label>
+              <ion-input type="text" readonly="true" value="{{selectedDurationData.file_charge | currency:'INR'}}" class="ion-text-right"></ion-input>
+            </ion-item>
             <ion-item class="ion-margin-bottom css-item" lines="none">
               <ion-label>Total Payable Amount:</ion-label>
               <ion-input type="text" readonly="true" value="{{totalPayableAmount | currency:'INR'}}" class="ion-text-right"></ion-input>
             </ion-item>
           </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <!--Payment Options-->
+    <ion-row *ngIf="flag == 'payment'">
+      <ion-col size-xl="6" offset-xl="3">
+        <ion-list>
+          <ion-card *ngFor="let pay of paymentList">
+            <ion-card-content class="item-detail">
+              <ion-item class="ion-margin-bottom" lines="none">
+                <ion-label>Type</ion-label>
+                <ion-input type="text" readonly="true" value="{{pay.type}}" class="ion-text-right"></ion-input>
+              </ion-item>
+              <ion-item class="ion-margin-botton" lines="none">
+                <ion-label>Number</ion-label>
+                <ion-input type="text" readonly="true" value="{{pay.number}}" class="ion-text-right"></ion-input>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>
